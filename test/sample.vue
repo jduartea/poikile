@@ -1,19 +1,28 @@
 <!--
   Poikile Theme — Vue (SFC) Test File
-
   Colors vary by variant — see PALETTE.md for hex values per theme.
 
   Scopes to verify:
-    entity.name.tag.template.vue       → tag (template tag)
-    entity.name.tag.script.vue         → tag (script tag)
-    entity.name.tag.style.vue          → tag (style tag)
-    meta.directive.vue                 → keyword (v-if, v-for, v-bind, v-on, v-model, v-show, v-slot)
-    entity.other.attribute-name.vue    → keyword (Vue-specific attributes)
-    punctuation.definition.directive   → keyword
-    variable.other.vue                 → fg.default (ref, reactive, computed variables)
-    support.function.vue               → function (defineComponent, defineProps, defineEmits, onMounted, watch, computed)
-
-    All TS/JS scopes apply within <script> blocks.
+    entity.name.tag.template.html.vue  → link      (<template> block tag)
+    entity.name.tag.script.html.vue   → function  (<script> block tag)
+    entity.name.tag.style.html.vue    → accent    (<style> block tag)
+    entity.name.tag.template.vue / .script.vue / .style.vue → link (fallback)
+    text.html.vue                     → fg.default (default text in .vue)
+    text.html.vue entity.name.tag.custom.html     → link (Vue components: TransitionGroup, slot)
+    entity.name.tag.html              → tag       (native: div, form, header, etc.)
+    meta.directive.vue                → keyword   (v-if, v-for, v-model, :class, @click)
+    entity.other.attribute-name.vue   → keyword
+    entity.other.attribute-name.html  → attribute (class, type, placeholder)
+    string.quoted.double.html         → fg.subtle  (attribute values)
+    meta.interpolation.vue / meta.expression.vue  → string ({{ }})
+    support.function.vue              → function  (defineProps, ref, computed, watch, onMounted)
+    source.vue entity.name.function.ts            → function (addTask, toggleTask, formatDate)
+    variable.other.vue                → decorator (tasks, filters, canAddTask, stats)
+    entity.name.type.*.ts             → type      (Task, TaskFilters, Ref)
+    keyword.control.ts                → keyword   (if, return, const)
+    constant.language.ts              → number    (true, false, null)
+    string.quoted.*.ts                → fg.subtle (string literals)
+    comment                           → fg.muted  (// comments)
     All CSS/SCSS scopes apply within <style> blocks.
     All HTML scopes apply within <template> blocks.
 -->

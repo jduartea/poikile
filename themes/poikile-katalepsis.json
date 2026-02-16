@@ -1392,6 +1392,25 @@
       }
     },
     {
+      "name": "TS/JS object reference (obj in obj.prop)",
+      "scope": [
+        "variable.other.object.ts"
+      ],
+      "settings": {
+        "foreground": "#475569"
+      }
+    },
+    {
+      "name": "TS/JS property access (prop in obj.prop)",
+      "scope": [
+        "variable.other.property.ts",
+        "variable.other.object.property.ts"
+      ],
+      "settings": {
+        "foreground": "#0d9488"
+      }
+    },
+    {
       "name": "TS/JS language variables (this, super, arguments)",
       "scope": [
         "variable.language.ts"
@@ -1881,12 +1900,51 @@
       }
     },
     {
-      "name": "HTML attribute values",
+      "name": "HTML attribute values (green/string)",
       "scope": [
         "string.quoted.double.html"
       ],
       "settings": {
-        "foreground": "#64748b"
+        "foreground": "#16a34a"
+      }
+    },
+    {
+      "name": "HTML meta: attribute class wrapper",
+      "scope": [
+        "meta.attribute.class.html"
+      ],
+      "settings": {
+        "foreground": "#d97706"
+      }
+    },
+    {
+      "name": "HTML meta: tag structure",
+      "scope": [
+        "meta.tag.structure.div.start.html",
+        "meta.tag.structure.any.html",
+        "meta.tag.inline.any.html",
+        "meta.tag.block.any.html"
+      ],
+      "settings": {
+        "foreground": "#2563eb"
+      }
+    },
+    {
+      "name": "HTML unrecognized tags (red)",
+      "scope": [
+        "meta.tag.other.unrecognized.html.derivative"
+      ],
+      "settings": {
+        "foreground": "#dc2626"
+      }
+    },
+    {
+      "name": "HTML derivative base scope",
+      "scope": [
+        "text.html.derivative"
+      ],
+      "settings": {
+        "foreground": "#334155"
       }
     },
     {
@@ -2652,48 +2710,155 @@
     },
 
     // ═══════════════════════════════════════════════════════════════════
-    // 19. VUE (SFC)
+    // 19. VUE (SFC) — Catppuccin-like structure, Tailwind colors
     // ═══════════════════════════════════════════════════════════════════
+    // blue=tags/functions  yellow=types  mauve=keywords  green=strings
+    // peach=constants  teal=obj-props  pink=components  red=built-ins
+
+    // ── Block tags ──────────────────────────────────────────────────────
     {
       "name": "Vue SFC block tags (template, script, style)",
       "scope": [
         "entity.name.tag.template.vue",
         "entity.name.tag.script.vue",
         "entity.name.tag.style.vue",
-        "entity.name.tag.svelte"
+        "entity.name.tag.template.html.vue",
+        "entity.name.tag.script.html.vue",
+        "entity.name.tag.style.html.vue"
       ],
       "settings": {
-        "foreground": "#0891b2"
+        "foreground": "#9333ea",
+        "fontStyle": "bold"
+      }
+    },
+
+    // ── Template ────────────────────────────────────────────────────────
+    {
+      "name": "Vue file default (text.html.vue)",
+      "scope": ["text.html.vue"],
+      "settings": { "foreground": "#334155" }
+    },
+    {
+      "name": "Vue template: native HTML tags (blue)",
+      "scope": [
+        "text.html.vue entity.name.tag.html",
+        "text.html.vue entity.name.tag.structure.html",
+        "text.html.vue entity.name.tag.inline.html",
+        "text.html.vue entity.name.tag.block.html",
+        "source.vue entity.name.tag.html",
+        "source.vue entity.name.tag.structure.html",
+        "source.vue entity.name.tag.inline.html",
+        "source.vue entity.name.tag.block.html"
+      ],
+      "settings": { "foreground": "#2563eb" }
+    },
+    {
+      "name": "Vue component tags (pink, bold)",
+      "scope": [
+        "text.html.vue entity.name.tag.custom.html",
+        "source.vue entity.name.tag.custom.html"
+      ],
+      "settings": {
+        "foreground": "#db2777",
+        "fontStyle": "bold"
       }
     },
     {
-      "name": "Vue directives (v-if, v-for, v-bind, v-on, v-model)",
+      "name": "Vue directives (mauve, bold)",
       "scope": [
         "meta.directive.vue",
         "entity.other.attribute-name.vue",
         "punctuation.definition.directive.vue"
       ],
       "settings": {
-        "foreground": "#e11d48"
+        "foreground": "#9333ea",
+        "fontStyle": "bold"
       }
     },
     {
-      "name": "Vue variables (ref, reactive, computed)",
+      "name": "Vue template: HTML attribute names (yellow)",
       "scope": [
-        "variable.other.vue"
+        "text.html.vue entity.other.attribute-name.html",
+        "source.vue entity.other.attribute-name.html"
       ],
+      "settings": { "foreground": "#d97706" }
+    },
+    {
+      "name": "Vue template interpolation (green)",
+      "scope": [
+        "meta.interpolation.vue",
+        "meta.expression.vue"
+      ],
+      "settings": { "foreground": "#16a34a" }
+    },
+
+    // ── Script ──────────────────────────────────────────────────────────
+    {
+      "name": "Vue composition API (blue, italic)",
+      "scope": ["support.function.vue"],
       "settings": {
-        "foreground": "#7c3aed"
+        "foreground": "#2563eb",
+        "fontStyle": "italic"
       }
     },
     {
-      "name": "Vue composition API (defineComponent, onMounted, watch)",
+      "name": "Vue script: function names (blue, italic)",
       "scope": [
-        "support.function.vue"
+        "source.vue entity.name.function.ts",
+        "text.html.vue entity.name.function.ts"
       ],
       "settings": {
-        "foreground": "#0d9488"
+        "foreground": "#2563eb",
+        "fontStyle": "italic"
       }
+    },
+    {
+      "name": "Vue variables (maroon, italic)",
+      "scope": ["variable.other.vue"],
+      "settings": {
+        "foreground": "#f43f5e",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Vue script: const bindings (peach)",
+      "scope": [
+        "source.vue variable.other.constant.ts",
+        "text.html.vue variable.other.constant.ts"
+      ],
+      "settings": { "foreground": "#ea580c" }
+    },
+    {
+      "name": "Vue script: true/false/null (red)",
+      "scope": [
+        "source.vue constant.language.ts",
+        "text.html.vue constant.language.ts"
+      ],
+      "settings": { "foreground": "#e11d48" }
+    },
+    {
+      "name": "Vue script: object property (teal)",
+      "scope": [
+        "source.vue variable.other.object.property.ts",
+        "text.html.vue variable.other.object.property.ts"
+      ],
+      "settings": { "foreground": "#0d9488" }
+    },
+    {
+      "name": "Vue script: object literal keys (teal)",
+      "scope": [
+        "source.vue meta.object-literal.key.ts",
+        "text.html.vue meta.object-literal.key.ts"
+      ],
+      "settings": { "foreground": "#0d9488" }
+    },
+    {
+      "name": "Vue script: template literals (green)",
+      "scope": [
+        "source.vue string.template.ts",
+        "text.html.vue string.template.ts"
+      ],
+      "settings": { "foreground": "#16a34a" }
     },
 
     // ═══════════════════════════════════════════════════════════════════
