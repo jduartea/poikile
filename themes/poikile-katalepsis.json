@@ -481,11 +481,10 @@
       "name": "Other constants (enum members, ALL_CAPS)",
       "scope": [
         "constant.other",
-        "variable.other.constant",
         "variable.other.enummember"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#ea580c"
       }
     },
 
@@ -1355,7 +1354,7 @@
         "entity.name.function.ts"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#16a34a"
       }
     },
     {
@@ -1370,7 +1369,7 @@
         "meta.type.parameters.ts"
       ],
       "settings": {
-        "foreground": "#059669"
+        "foreground": "#0891b2"
       }
     },
     {
@@ -1379,7 +1378,7 @@
         "variable.other.readwrite.ts"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#4f46e5"
       }
     },
     {
@@ -1388,7 +1387,8 @@
         "variable.other.constant.ts"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#2563eb",
+        "fontStyle": "italic"
       }
     },
     {
@@ -1397,17 +1397,25 @@
         "variable.other.object.ts"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#d97706"
       }
     },
     {
-      "name": "TS/JS property access (prop in obj.prop)",
+      "name": "TS/JS terminal property (end in obj.end)",
       "scope": [
-        "variable.other.property.ts",
+        "variable.other.property.ts"
+      ],
+      "settings": {
+        "foreground": "#7c3aed"
+      }
+    },
+    {
+      "name": "TS/JS chained object property (mid in obj.mid.end)",
+      "scope": [
         "variable.other.object.property.ts"
       ],
       "settings": {
-        "foreground": "#0d9488"
+        "foreground": "#d97706"
       }
     },
     {
@@ -1472,12 +1480,22 @@
       }
     },
     {
-      "name": "TS/JS object literal keys",
+      "name": "TS/JS booleans (true, false)",
+      "scope": [
+        "constant.language.boolean.true.ts",
+        "constant.language.boolean.false.ts"
+      ],
+      "settings": {
+        "foreground": "#dc2626"
+      }
+    },
+    {
+      "name": "TS/JS object literal keys (teal)",
       "scope": [
         "meta.object-literal.key.ts"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#0d9488"
       }
     },
     {
@@ -1909,12 +1927,13 @@
       }
     },
     {
-      "name": "HTML meta: attribute class wrapper",
+      "name": "HTML class attribute name",
       "scope": [
-        "meta.attribute.class.html"
+        "meta.attribute.class.html entity.other.attribute-name.html"
       ],
       "settings": {
-        "foreground": "#d97706"
+        "foreground": "#0d9488",
+        "fontStyle": "italic"
       }
     },
     {
@@ -2052,7 +2071,7 @@
         "variable.css"
       ],
       "settings": {
-        "foreground": "#7c3aed"
+        "foreground": "#db2777"
       }
     },
     {
@@ -2755,15 +2774,24 @@
       }
     },
     {
-      "name": "Vue directives (mauve, bold)",
+      "name": "Vue directives (mauve, bold italic)",
       "scope": [
         "meta.directive.vue",
         "entity.other.attribute-name.vue",
         "punctuation.definition.directive.vue"
       ],
       "settings": {
-        "foreground": "#9333ea",
-        "fontStyle": "bold"
+        "foreground": "#ea580c",
+        "fontStyle": "bold italic"
+      }
+    },
+    {
+      "name": "Vue directive attribute name (yellow, plain)",
+      "scope": [
+        "entity.other.attribute-name.html.vue"
+      ],
+      "settings": {
+        "foreground": "#d97706"
       }
     },
     {
@@ -2793,13 +2821,13 @@
       }
     },
     {
-      "name": "Vue script: function names (blue, italic)",
+      "name": "Vue script: function names (green, italic)",
       "scope": [
         "source.vue entity.name.function.ts",
         "text.html.vue entity.name.function.ts"
       ],
       "settings": {
-        "foreground": "#2563eb",
+        "foreground": "#16a34a",
         "fontStyle": "italic"
       }
     },
@@ -2812,12 +2840,12 @@
       }
     },
     {
-      "name": "Vue script: const bindings (peach)",
+      "name": "Vue script: const bindings (blue, italic)",
       "scope": [
         "source.vue variable.other.constant.ts",
         "text.html.vue variable.other.constant.ts"
       ],
-      "settings": { "foreground": "#ea580c" }
+      "settings": { "foreground": "#2563eb", "fontStyle": "italic" }
     },
     {
       "name": "Vue script: true/false/null (red)",
@@ -2828,12 +2856,12 @@
       "settings": { "foreground": "#e11d48" }
     },
     {
-      "name": "Vue script: object property (teal)",
+      "name": "Vue script: chained object property (amber)",
       "scope": [
         "source.vue variable.other.object.property.ts",
         "text.html.vue variable.other.object.property.ts"
       ],
-      "settings": { "foreground": "#0d9488" }
+      "settings": { "foreground": "#d97706" }
     },
     {
       "name": "Vue script: object literal keys (teal)",
@@ -2902,33 +2930,33 @@
     "namespace": "#2563eb",
 
     // ── Types ───────────────────────────────────────────────────────────
-    "type": "#059669",
-    "type.defaultLibrary": "#059669",
-    "class": "#059669",
-    "class.defaultLibrary": "#059669",
-    "interface": "#059669",
-    "struct": "#059669",
-    "enum": "#059669",
-    "enumMember": "#ca8a04",
-    "typeParameter": { "foreground": "#059669", "fontStyle": "italic" },
-    "builtinType": "#059669",
+    "type": "#0891b2",
+    "type.defaultLibrary": "#0891b2",
+    "class": "#0891b2",
+    "class.defaultLibrary": "#0891b2",
+    "interface": "#0891b2",
+    "struct": "#0891b2",
+    "enum": "#0891b2",
+    "enumMember": "#ea580c",
+    "typeParameter": { "foreground": "#0891b2", "fontStyle": "italic" },
+    "builtinType": "#0891b2",
 
     // ── Functions & Methods ─────────────────────────────────────────────
-    "function": "#ca8a04",
-    "function.defaultLibrary": "#ca8a04",
-    "method": "#ca8a04",
-    "macro": "#ca8a04",
-    "event": "#ca8a04",
+    "function": "#16a34a",
+    "function.defaultLibrary": "#16a34a",
+    "method": "#16a34a",
+    "macro": "#16a34a",
+    "event": "#16a34a",
 
     // ── Variables & Parameters ──────────────────────────────────────────
-    "variable": "#475569",
-    "variable.readonly": "#ca8a04",
-    "variable.readonly.defaultLibrary": "#ca8a04",
+    "variable": "#4f46e5",
+    "variable.readonly": { "foreground": "#2563eb", "fontStyle": "italic" },
+    "variable.readonly.defaultLibrary": { "foreground": "#2563eb", "fontStyle": "italic" },
     "variable.defaultLibrary": "#475569",
     "parameter": "#475569",
-    "property": "#d97706",
-    "property.readonly": "#ca8a04",
-    "property.declaration": "#d97706",
+    "property": { "fontStyle": "" },
+    "property.readonly": { "fontStyle": "" },
+    "property.declaration": { "fontStyle": "" },
 
     // ── Decorators & Annotations ────────────────────────────────────────
     "decorator": { "foreground": "#7c3aed", "fontStyle": "italic" },
