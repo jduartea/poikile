@@ -773,7 +773,62 @@
       }
     },
     {
-      "name": "Markup heading punctuation (#)",
+      "name": "Markup heading punctuation (#) — per-level, slightly lighter than title",
+      "scope": [
+        "markup.heading.1.markdown punctuation.definition.heading.markdown",
+        "heading.1.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#fde047"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading.2.markdown punctuation.definition.heading.markdown",
+        "heading.2.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#fda4af"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading.3.markdown punctuation.definition.heading.markdown",
+        "heading.3.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#6ee7b7"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading.4.markdown punctuation.definition.heading.markdown",
+        "heading.4.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading.5.markdown punctuation.definition.heading.markdown",
+        "heading.5.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#c4b5fd"
+      }
+    },
+    {
+      "scope": [
+        "markup.heading.6.markdown punctuation.definition.heading.markdown",
+        "heading.6.markdown punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Markup heading punctuation (#) — fallback",
       "scope": [
         "punctuation.definition.heading.markdown"
       ],
