@@ -1002,7 +1002,8 @@
         "keyword.control.go"
       ],
       "settings": {
-        "foreground": "#22d3ee"
+        "foreground": "#22d3ee",
+        "fontStyle": "italic"
       }
     },
     {
@@ -1036,13 +1037,21 @@
       }
     },
     {
-      "name": "Go pointer and address operators (*, &)",
+      "name": "Go pointer operator (*)",
       "scope": [
-        "keyword.operator.pointer.go",
-        "keyword.operator.address.go"
+        "keyword.operator.pointer.go"
       ],
       "settings": {
         "foreground": "#c084fc"
+      }
+    },
+    {
+      "name": "Go address operator (&)",
+      "scope": [
+        "keyword.operator.address.go"
+      ],
+      "settings": {
+        "foreground": "#fb923c"
       }
     },
     {
@@ -1181,13 +1190,22 @@
       }
     },
     {
-      "name": "Go raw strings and format verbs",
+      "name": "Go raw strings",
       "scope": [
-        "string.quoted.raw.go",
-        "constant.other.placeholder.go"
+        "string.quoted.raw.go"
       ],
       "settings": {
         "foreground": "#fb923c"
+      }
+    },
+    {
+      "name": "Go format verbs (placeholders)",
+      "scope": [
+        "constant.other.placeholder.go"
+      ],
+      "settings": {
+        "foreground": "#ffffff",
+        "fontStyle": "bold"
       }
     },
     {
