@@ -1930,15 +1930,6 @@
       }
     },
     {
-      "name": "HTML unrecognized tags (red)",
-      "scope": [
-        "meta.tag.other.unrecognized.html.derivative"
-      ],
-      "settings": {
-        "foreground": "#f87171"
-      }
-    },
-    {
       "name": "HTML derivative base scope",
       "scope": [
         "text.html.derivative"
