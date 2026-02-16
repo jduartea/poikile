@@ -149,31 +149,17 @@ local_datetime = 2024-03-15T14:30:00
 
 # Array tables
 [[themes]]
-name = "Poikile - Ataraxia"
-type = "dark"
-variant = "warm"
-primary_accent = "#c2788e"
-is_default = true
-
-[[themes]]
 name = "Poikile - Apatheia"
 type = "dark"
-variant = "vivid"
-primary_accent = "#d4698e"
-is_default = false
-
-[[themes]]
-name = "Poikile - Euthymia"
-type = "light"
-variant = "warm"
-primary_accent = "#9e5a6e"
-is_default = false
+palette = "Tailwind 300/400"
+primary_accent = "#e879f9"
+is_default = true
 
 [[themes]]
 name = "Poikile - Katalepsis"
 type = "light"
-variant = "vivid"
-primary_accent = "#c0386e"
+palette = "Tailwind 500/600"
+primary_accent = "#c026d3"
 is_default = false
 
 [[themes.colors]]

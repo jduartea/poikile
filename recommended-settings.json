@@ -50,10 +50,10 @@
   // Catppuccin Icons pairs well with Poikile.
   // Use Mocha for dark variants, Latte for light variants.
   //
-  // For dark (Ataraxia / Apatheia):
+  // For dark (Apatheia):
   "workbench.iconTheme": "catppuccin-mocha",
   //
-  // For light (Euthymia / Katalepsis):
+  // For light (Katalepsis):
   // "workbench.iconTheme": "catppuccin-latte",
 
   // ── Workbench ─────────────────────────────────────────────────────────
@@ -61,7 +61,7 @@
   // Uncomment and adjust any of these if you want to tweak the theme:
   //
   // "workbench.colorCustomizations": {
-  //   "[Poikile - Ataraxia]": {
+  //   "[Poikile - Apatheia]": {
   //     "editor.background": "#1a1a1e",
   //     "editorCursor.foreground": "#b48ead",
   //     "statusBar.background": "#141416"
@@ -69,7 +69,7 @@
   // },
   //
   // "editor.tokenColorCustomizations": {
-  //   "[Poikile - Ataraxia]": {
+  //   "[Poikile - Apatheia]": {
   //     "comments": "#8a8784",
   //     "strings": "#a3b87c"
   //   }

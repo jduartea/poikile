@@ -9,11 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Four Stoic-inspired color theme variants:
-  - **Poikile - Ataraxia** — dark warm (muted, calm)
-  - **Poikile - Apatheia** — dark vivid (higher saturation, more contrast)
-  - **Poikile - Euthymia** — light warm (muted, balanced)
-  - **Poikile - Katalepsis** — light vivid (higher saturation, precise)
+- Two Stoic-inspired color theme variants (Tailwind CSS palette):
+  - **Poikile - Apatheia** — dark (Tailwind 300 & 400)
+  - **Poikile - Katalepsis** — light (Tailwind 500 & 600, slate surfaces)
 - Full UI color coverage: editor, sidebar, activity bar, status bar, title bar, tabs, panels, terminal, minimap, diff editor, debug, breadcrumbs, notifications, inputs, buttons, badges, peek view, merge conflicts, settings editor, welcome page, inlay hints
 - TextMate token scopes for 21 languages: Go, Dart, TypeScript, TSX, Python, Rust, Ruby, HTML, CSS, SCSS, Markdown, JSON, YAML, TOML, Shell/Bash, SQL, GraphQL, Protocol Buffers, Dockerfile, Vue, Svelte
 - Semantic token colors for all VS Code semantic highlighting token types

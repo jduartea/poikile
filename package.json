@@ -1,58 +1,21 @@
 {
   "name": "poikile-theme",
   "displayName": "Poikile",
-  "description": "Four Stoic-inspired color themes — dark & light, warm & vivid. Named after the Stoa Poikile of ancient Athens.",
+  "description": "Two Stoic-inspired color themes — dark (Apatheia) and light (Katalepsis), both using Tailwind CSS colors. Named after the Stoa Poikile of ancient Athens.",
   "version": "0.1.0",
   "publisher": "jduartea",
   "license": "MIT",
-  "engines": {
-    "vscode": "^1.70.0"
-  },
-  "categories": [
-    "Themes"
-  ],
-  "keywords": [
-    "dark",
-    "light",
-    "stoic",
-    "warm",
-    "vivid",
-    "minimal",
-    "calm",
-    "muted",
-    "theme"
-  ],
+  "engines": { "vscode": "^1.70.0" },
+  "categories": ["Themes"],
+  "keywords": ["dark", "light", "stoic", "tailwind", "minimal", "theme"],
   "contributes": {
     "themes": [
-      {
-        "label": "Poikile - Ataraxia",
-        "uiTheme": "vs-dark",
-        "path": "./themes/poikile-ataraxia.json"
-      },
-      {
-        "label": "Poikile - Apatheia",
-        "uiTheme": "vs-dark",
-        "path": "./themes/poikile-apatheia.json"
-      },
-      {
-        "label": "Poikile - Euthymia",
-        "uiTheme": "vs",
-        "path": "./themes/poikile-euthymia.json"
-      },
-      {
-        "label": "Poikile - Katalepsis",
-        "uiTheme": "vs",
-        "path": "./themes/poikile-katalepsis.json"
-      }
+      { "label": "Poikile - Apatheia", "uiTheme": "vs-dark", "path": "./themes/poikile-apatheia.json" },
+      { "label": "Poikile - Katalepsis", "uiTheme": "vs", "path": "./themes/poikile-katalepsis.json" }
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jduartea/poikile-theme"
-  },
+  "repository": { "type": "git", "url": "https://github.com/jduartea/poikile-theme" },
   "homepage": "https://github.com/jduartea/poikile-theme#readme",
-  "bugs": {
-    "url": "https://github.com/jduartea/poikile-theme/issues"
-  },
+  "bugs": { "url": "https://github.com/jduartea/poikile-theme/issues" },
   "icon": "icon.png"
 }

@@ -16,10 +16,8 @@ poikile-theme/
 ├── LICENSE                         # MIT
 ├── icon.png                        # 256×256 theme icon (provide an SVG source too)
 ├── themes/
-│   ├── poikile-ataraxia.json       # Dark warm variant
-│   ├── poikile-apatheia.json       # Dark vivid variant
-│   ├── poikile-euthymia.json       # Light warm variant
-│   └── poikile-katalepsis.json     # Light vivid variant
+│   ├── poikile-apatheia.json       # Dark (Tailwind 300/400)
+│   └── poikile-katalepsis.json     # Light (Tailwind 500/600)
 └── test/
     ├── sample.go
     ├── sample.dart
@@ -53,7 +51,7 @@ poikile-theme/
 | Principle | Design Translation |
 |---|---|
 | **Katalepsis** (clarity of thought) | Crystal-clear visual hierarchy — every token has exactly one unambiguous role |
-| **Ataraxia** (tranquility) | Muted, desaturated palette that reduces cognitive noise |
+| **Apatheia** (dark) | Tailwind 300/400 on dark background |
 | **Prosoche** (attention) | Important elements (functions, types, errors) draw the eye; noise recedes |
 | **Sophrosyne** (temperance) | Restrained palette of ~14–16 semantic colors, no gratuitous decoration |
 | **Endurance** | Timeless warm-neutral tones that won't feel dated in 5 years |
@@ -900,10 +898,8 @@ Create comprehensive test files for each language that exercise **every** scope 
   "keywords": ["dark", "light", "stoic", "warm", "vivid", "minimal", "calm", "muted", "theme"],
   "contributes": {
     "themes": [
-      { "label": "Poikile - Ataraxia",   "uiTheme": "vs-dark", "path": "./themes/poikile-ataraxia.json" },
-      { "label": "Poikile - Apatheia",    "uiTheme": "vs-dark", "path": "./themes/poikile-apatheia.json" },
-      { "label": "Poikile - Euthymia",    "uiTheme": "vs",      "path": "./themes/poikile-euthymia.json" },
-      { "label": "Poikile - Katalepsis",  "uiTheme": "vs",      "path": "./themes/poikile-katalepsis.json" }
+      { "label": "Poikile - Apatheia",   "uiTheme": "vs-dark", "path": "./themes/poikile-apatheia.json" },
+      { "label": "Poikile - Katalepsis", "uiTheme": "vs",      "path": "./themes/poikile-katalepsis.json" }
     ]
   },
   "repository": {
@@ -957,12 +953,10 @@ Before delivering, verify:
 ## 12. DELIVERABLES
 
 Produce **all** of the following files:
-1. `themes/poikile-ataraxia.json` — dark warm variant
-2. `themes/poikile-apatheia.json` — dark vivid variant
-3. `themes/poikile-euthymia.json` — light warm variant
-4. `themes/poikile-katalepsis.json` — light vivid variant
-5. `package.json` — extension manifest with all 4 variants
-6. `README.md` — with palette swatches, philosophy, screenshots placeholder, install instructions
-7. `recommended-settings.json`
-8. All 21 test files in `test/`
-9. `PALETTE.md` — a reference document listing every color per variant, hex codes, contrast ratios, and semantic roles
+1. `themes/poikile-apatheia.json` — dark (Tailwind 300/400)
+2. `themes/poikile-katalepsis.json` — light (Tailwind 500/600)
+3. `package.json` — extension manifest with both themes
+4. `README.md` — philosophy, install instructions
+5. `recommended-settings.json`
+6. All 21 test files in `test/`
+7. `PALETTE.md` — color reference per variant (Tailwind mapping), contrast, semantic roles
