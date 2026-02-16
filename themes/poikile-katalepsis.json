@@ -953,6 +953,16 @@
       }
     },
     {
+      "name": "Go pointer and address operators (*, &)",
+      "scope": [
+        "keyword.operator.pointer.go",
+        "keyword.operator.address.go"
+      ],
+      "settings": {
+        "foreground": "#9333ea"
+      }
+    },
+    {
       "name": "Go type-related keywords (type, struct, interface, map)",
       "scope": [
         "keyword.type.go",
