@@ -1926,7 +1926,7 @@
         "entity.other.attribute-name.class.css"
       ],
       "settings": {
-        "foreground": "#facc15"
+        "foreground": "#22d3ee"
       }
     },
     {
@@ -1935,7 +1935,7 @@
         "entity.other.attribute-name.id.css"
       ],
       "settings": {
-        "foreground": "#facc15"
+        "foreground": "#a78bfa"
       }
     },
     {
@@ -1951,21 +1951,20 @@
     {
       "name": "CSS property names",
       "scope": [
-        "support.type.property-name.css",
-        "meta.property-value.css"
+        "support.type.property-name.css"
       ],
       "settings": {
-        "foreground": "#fcd34d"
+        "foreground": "#38bdf8"
       }
     },
     {
-      "name": "CSS property values",
+      "name": "CSS property values and named colors",
       "scope": [
         "support.constant.property-value.css",
         "support.constant.color.css"
       ],
       "settings": {
-        "foreground": "#d1d5db"
+        "foreground": "#94a3b8"
       }
     },
     {
@@ -1984,16 +1983,16 @@
         "constant.other.color.rgb-value.css"
       ],
       "settings": {
-        "foreground": "#fbbf24"
+        "foreground": "#34d399"
       }
     },
     {
-      "name": "CSS functions (calc, var, rgb)",
+      "name": "CSS functions (calc, var, rgb, url)",
       "scope": [
         "support.function.css"
       ],
       "settings": {
-        "foreground": "#facc15"
+        "foreground": "#2dd4bf"
       }
     },
     {
@@ -2002,7 +2001,7 @@
         "variable.css"
       ],
       "settings": {
-        "foreground": "#d1d5db"
+        "foreground": "#a78bfa"
       }
     },
     {
@@ -2040,7 +2039,7 @@
         "entity.name.function.scss"
       ],
       "settings": {
-        "foreground": "#facc15"
+        "foreground": "#2dd4bf"
       }
     },
     {
@@ -2049,7 +2048,7 @@
         "variable.scss"
       ],
       "settings": {
-        "foreground": "#d1d5db"
+        "foreground": "#a78bfa"
       }
     },
     {

@@ -1926,7 +1926,7 @@
         "entity.other.attribute-name.class.css"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#0891b2"
       }
     },
     {
@@ -1935,7 +1935,7 @@
         "entity.other.attribute-name.id.css"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#7c3aed"
       }
     },
     {
@@ -1951,21 +1951,20 @@
     {
       "name": "CSS property names",
       "scope": [
-        "support.type.property-name.css",
-        "meta.property-value.css"
+        "support.type.property-name.css"
       ],
       "settings": {
-        "foreground": "#d97706"
+        "foreground": "#0ea5e9"
       }
     },
     {
-      "name": "CSS property values",
+      "name": "CSS property values and named colors",
       "scope": [
         "support.constant.property-value.css",
         "support.constant.color.css"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#64748b"
       }
     },
     {
@@ -1984,16 +1983,16 @@
         "constant.other.color.rgb-value.css"
       ],
       "settings": {
-        "foreground": "#d97706"
+        "foreground": "#059669"
       }
     },
     {
-      "name": "CSS functions (calc, var, rgb)",
+      "name": "CSS functions (calc, var, rgb, url)",
       "scope": [
         "support.function.css"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#0d9488"
       }
     },
     {
@@ -2002,7 +2001,7 @@
         "variable.css"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#7c3aed"
       }
     },
     {
@@ -2040,7 +2039,7 @@
         "entity.name.function.scss"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#0d9488"
       }
     },
     {
@@ -2049,7 +2048,7 @@
         "variable.scss"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#7c3aed"
       }
     },
     {
