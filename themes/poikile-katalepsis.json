@@ -852,11 +852,20 @@
         "markup.inline.raw",
         "markup.inline.raw.markdown",
         "markup.fenced_code",
-        "markup.fenced_code.block.markdown",
-        "fenced_code.block.language"
+        "markup.fenced_code.block.markdown"
       ],
       "settings": {
         "foreground": "#ea580c"
+      }
+    },
+    {
+      "name": "Markdown fenced code block language (e.g. ```typescript)",
+      "scope": [
+        "fenced_code.block.language",
+        "markup.fenced_code.block.language.markdown"
+      ],
+      "settings": {
+        "foreground": "#64748b"
       }
     },
     {
