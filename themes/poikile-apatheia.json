@@ -44,18 +44,18 @@
     "editorCodeLens.foreground": "#9ca3af",
     "editorBracketMatch.background": "#34343d66",
     "editorBracketMatch.border": "#94a3b866",
-    "editorBracketHighlight.foreground1": "#facc15",
-    "editorBracketHighlight.foreground2": "#facc15",
-    "editorBracketHighlight.foreground3": "#facc15",
-    "editorBracketHighlight.foreground4": "#facc15",
-    "editorBracketHighlight.foreground5": "#facc15",
-    "editorBracketHighlight.foreground6": "#facc15",
-    "editorBracketPairGuide.activeBackground1": "#facc1540",
-    "editorBracketPairGuide.activeBackground2": "#facc1540",
-    "editorBracketPairGuide.activeBackground3": "#facc1540",
-    "editorBracketPairGuide.activeBackground4": "#facc1540",
-    "editorBracketPairGuide.activeBackground5": "#facc1540",
-    "editorBracketPairGuide.activeBackground6": "#facc1540",
+    "editorBracketHighlight.foreground1": "#60a5fa",
+    "editorBracketHighlight.foreground2": "#38bdf8",
+    "editorBracketHighlight.foreground3": "#2dd4bf",
+    "editorBracketHighlight.foreground4": "#34d399",
+    "editorBracketHighlight.foreground5": "#e879f9",
+    "editorBracketHighlight.foreground6": "#fb7185",
+    "editorBracketPairGuide.activeBackground1": "#60a5fa40",
+    "editorBracketPairGuide.activeBackground2": "#38bdf840",
+    "editorBracketPairGuide.activeBackground3": "#2dd4bf40",
+    "editorBracketPairGuide.activeBackground4": "#34d39940",
+    "editorBracketPairGuide.activeBackground5": "#e879f940",
+    "editorBracketPairGuide.activeBackground6": "#fb718540",
     "editorGhostText.foreground": "#9ca3af66",
     "editorStickyScroll.background": "#18181b",
     "editorStickyScrollHover.background": "#1c1c21",
@@ -2071,10 +2071,8 @@
     //  markdown-only scopes.)
 
     // ═══════════════════════════════════════════════════════════════════
-    // 11. JSON — rethought palette (keys by depth, values by type, punctuation muted)
+    // 11. JSON — keys by depth, values by type (brackets use editorBracketHighlight)
     // ═══════════════════════════════════════════════════════════════════
-    // Keys: cool→warm spectrum (blue→sky→teal→emerald→fuchsia→rose), then slate for deep
-    // Values: strings/number/literals/punctuation each distinct
     {
       "name": "JSON keys — level 6+ (deepest)",
       "scope": [
@@ -2166,16 +2164,12 @@
       }
     },
     {
-      "name": "JSON punctuation",
+      "name": "JSON punctuation (quotes, colon, comma; brackets use editorBracketHighlight)",
       "scope": [
         "punctuation.definition.string.begin.json",
         "punctuation.definition.string.end.json",
         "punctuation.separator.dictionary.key-value.json",
-        "punctuation.separator.array.json",
-        "punctuation.definition.dictionary.begin.json",
-        "punctuation.definition.dictionary.end.json",
-        "punctuation.definition.array.begin.json",
-        "punctuation.definition.array.end.json"
+        "punctuation.separator.array.json"
       ],
       "settings": {
         "foreground": "#64748b"
