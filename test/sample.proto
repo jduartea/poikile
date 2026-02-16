@@ -1,0 +1,326 @@
+// Poikile Theme — Protocol Buffers Test File
+//
+// Scopes to verify:
+//   keyword.other.proto        → #c2788e  (syntax, package, import, option, message, enum, service, rpc, returns, oneof, map, reserved, repeated, optional, required)
+//   entity.name.type.proto     → #7db89e  (message names, enum names)
+//   entity.name.class.proto    → #7db89e  (class names)
+//   entity.name.function.proto → #d4a55c  (rpc method names)
+//   storage.type.proto         → #7db89e  (int32, int64, uint32, string, bool, bytes, float, double, fixed32, sint32)
+//   constant.numeric.proto     → #c9905a  (numbers)
+//   string.quoted.double.proto → #a3b87c  (strings)
+//   comment                    → #8a8784  italic
+
+syntax = "proto3";
+
+package poikile.api.v1;
+
+option go_package = "github.com/jduartea/poikile/api/v1;apiv1";
+option java_package = "com.jduartea.poikile.api.v1";
+option java_multiple_files = true;
+option csharp_namespace = "Poikile.Api.V1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "google/api/annotations.proto";
+
+// ── Enums ───────────────────────────────────────────────────────────
+
+enum Priority {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;
+  PRIORITY_MEDIUM = 2;
+  PRIORITY_HIGH = 3;
+  PRIORITY_CRITICAL = 4;
+}
+
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_PENDING = 1;
+  TASK_STATUS_RUNNING = 2;
+  TASK_STATUS_COMPLETED = 3;
+  TASK_STATUS_FAILED = 4;
+  TASK_STATUS_CANCELLED = 5;
+}
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_ADMIN = 1;
+  USER_ROLE_EDITOR = 2;
+  USER_ROLE_VIEWER = 3;
+  USER_ROLE_GUEST = 4;
+}
+
+enum SortOrder {
+  SORT_ORDER_UNSPECIFIED = 0;
+  SORT_ORDER_ASC = 1;
+  SORT_ORDER_DESC = 2;
+}
+
+// ── Messages ────────────────────────────────────────────────────────
+
+// User represents a registered user in the system.
+message User {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  UserRole role = 4;
+  bool is_active = 5;
+  string avatar_url = 6;
+  int32 login_count = 7;
+  google.protobuf.Timestamp last_login_at = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// Task represents a unit of work in the pipeline.
+message Task {
+  string id = 1;
+  string title = 2;
+  google.protobuf.StringValue description = 3;
+  TaskStatus status = 4;
+  Priority priority = 5;
+  string assignee_id = 6;
+
+  // Timing fields
+  google.protobuf.Timestamp due_date = 7;
+  float estimated_hours = 8;
+  float actual_hours = 9;
+
+  // Metadata
+  repeated string tags = 10;
+  map<string, string> metadata = 11;
+  google.protobuf.Struct extra = 12;
+
+  // Audit fields
+  string created_by = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+  google.protobuf.Timestamp completed_at = 16;
+
+  // Reserved for future use
+  reserved 50 to 60;
+  reserved "internal_state", "debug_info";
+}
+
+message Comment {
+  string id = 1;
+  string task_id = 2;
+  string author_id = 3;
+  string body = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Nested messages for complex structures
+message TaskConfig {
+  message RetryPolicy {
+    int32 max_attempts = 1;
+    google.protobuf.Duration initial_backoff = 2;
+    google.protobuf.Duration max_backoff = 3;
+    double backoff_multiplier = 4;
+  }
+
+  message ResourceLimits {
+    int64 max_memory_bytes = 1;
+    int32 max_cpu_millicores = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+
+  RetryPolicy retry_policy = 1;
+  ResourceLimits resource_limits = 2;
+  map<string, string> environment = 3;
+  repeated string labels = 4;
+}
+
+// Oneof example
+message NotificationTarget {
+  string recipient_id = 1;
+
+  oneof channel {
+    EmailConfig email = 2;
+    SlackConfig slack = 3;
+    WebhookConfig webhook = 4;
+  }
+}
+
+message EmailConfig {
+  string subject = 1;
+  string template_id = 2;
+  bool html = 3;
+}
+
+message SlackConfig {
+  string channel = 1;
+  string thread_ts = 2;
+  bool mention_user = 3;
+}
+
+message WebhookConfig {
+  string url = 1;
+  map<string, string> headers = 2;
+  bytes payload = 3;
+}
+
+// ── Request / Response Messages ─────────────────────────────────────
+
+message CreateTaskRequest {
+  string title = 1;
+  string description = 2;
+  Priority priority = 3;
+  string assignee_id = 4;
+  repeated string tags = 5;
+  TaskConfig config = 6;
+}
+
+message CreateTaskResponse {
+  Task task = 1;
+}
+
+message GetTaskRequest {
+  string id = 1;
+}
+
+message GetTaskResponse {
+  Task task = 1;
+}
+
+message ListTasksRequest {
+  // Filtering
+  repeated TaskStatus statuses = 1;
+  repeated Priority priorities = 2;
+  string assignee_id = 3;
+  repeated string tags = 4;
+
+  // Pagination
+  int32 page_size = 10;
+  string page_token = 11;
+
+  // Sorting
+  string sort_by = 12;
+  SortOrder sort_order = 13;
+}
+
+message ListTasksResponse {
+  repeated Task tasks = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateTaskRequest {
+  string id = 1;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue description = 3;
+  TaskStatus status = 4;
+  Priority priority = 5;
+  string assignee_id = 6;
+}
+
+message UpdateTaskResponse {
+  Task task = 1;
+}
+
+message DeleteTaskRequest {
+  string id = 1;
+}
+
+message BatchUpdateStatusRequest {
+  repeated string task_ids = 1;
+  TaskStatus status = 2;
+}
+
+message BatchUpdateStatusResponse {
+  int32 updated_count = 1;
+  repeated string updated_ids = 2;
+  repeated string failed_ids = 3;
+}
+
+message TaskStatsRequest {
+  string assignee_id = 1;
+}
+
+message TaskStatsResponse {
+  int32 total = 1;
+  int32 pending = 2;
+  int32 running = 3;
+  int32 completed = 4;
+  int32 failed = 5;
+  float average_completion_hours = 6;
+  float completion_rate = 7;
+}
+
+message StreamTaskUpdatesRequest {
+  repeated string task_ids = 1;
+}
+
+message TaskEvent {
+  enum EventType {
+    EVENT_TYPE_UNSPECIFIED = 0;
+    EVENT_TYPE_CREATED = 1;
+    EVENT_TYPE_UPDATED = 2;
+    EVENT_TYPE_DELETED = 3;
+    EVENT_TYPE_STATUS_CHANGED = 4;
+    EVENT_TYPE_ASSIGNED = 5;
+  }
+
+  EventType type = 1;
+  Task task = 2;
+  google.protobuf.Timestamp event_time = 3;
+  string triggered_by = 4;
+}
+
+// ── Service Definitions ─────────────────────────────────────────────
+
+// TaskService manages task lifecycle operations.
+service TaskService {
+  // Creates a new task.
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {
+    option (google.api.http) = {
+      post: "/v1/tasks"
+      body: "*"
+    };
+  }
+
+  // Retrieves a task by ID.
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks/{id}"
+    };
+  }
+
+  // Lists tasks with filtering and pagination.
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks"
+    };
+  }
+
+  // Updates an existing task.
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse) {
+    option (google.api.http) = {
+      patch: "/v1/tasks/{id}"
+      body: "*"
+    };
+  }
+
+  // Deletes a task.
+  rpc DeleteTask(DeleteTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/tasks/{id}"
+    };
+  }
+
+  // Batch update task statuses.
+  rpc BatchUpdateStatus(BatchUpdateStatusRequest) returns (BatchUpdateStatusResponse);
+
+  // Get task statistics.
+  rpc GetTaskStats(TaskStatsRequest) returns (TaskStatsResponse) {
+    option (google.api.http) = {
+      get: "/v1/tasks/stats"
+    };
+  }
+
+  // Stream real-time task updates.
+  rpc StreamTaskUpdates(StreamTaskUpdatesRequest) returns (stream TaskEvent);
+}

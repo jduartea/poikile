@@ -1,0 +1,444 @@
+# Poikile Theme — GraphQL Test File
+#
+# Colors vary by variant — see PALETTE.md for hex values per theme.
+#
+# Scopes to verify:
+#   keyword.type.graphql            → keyword  (type, input, interface, enum, union, scalar, schema, extend)
+#   keyword.operation.graphql       → keyword  (query, mutation, subscription, fragment, on)
+#   keyword.directive.graphql       → decorator  italic (@deprecated, @skip, @include)
+#   entity.name.type.graphql        → type  (type names)
+#   support.type.builtin.graphql    → type  (String, Int, Float, Boolean, ID)
+#   entity.name.function.graphql    → function  (field names)
+#   entity.name.fragment.graphql    → function  (fragment names)
+#   variable.graphql                → fg.default  ($variable)
+#   constant.language.graphql       → number  (true, false, null)
+#   keyword.operator.nulltype.graphql → keyword (!)
+#   string.quoted.double.graphql    → string  (strings)
+#   constant.numeric.graphql        → number  (numbers)
+#   comment                         → fg.muted  italic
+
+# ── Schema Definition ────────────────────────────────────────────────
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+# ── Scalars ──────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ── Enums ────────────────────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  VIEWER
+  GUEST
+}
+
+enum TaskStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+# ── Interfaces ───────────────────────────────────────────────────────
+
+interface Node {
+  id: ID!
+}
+
+interface Timestamped {
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+interface Auditable {
+  createdBy: User!
+  lastModifiedBy: User
+}
+
+# ── Union Types ──────────────────────────────────────────────────────
+
+union SearchResult = User | Task | Comment
+union NotificationTarget = Task | Comment
+
+# ── Types ────────────────────────────────────────────────────────────
+
+type User implements Node & Timestamped {
+  id: ID!
+  email: String!
+  name: String!
+  role: UserRole!
+  isActive: Boolean!
+  avatar: String
+  loginCount: Int!
+  lastLoginAt: DateTime
+  tasks(
+    status: TaskStatus
+    first: Int = 10
+    after: String
+  ): TaskConnection!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Task implements Node & Timestamped & Auditable {
+  id: ID!
+  title: String!
+  description: String
+  status: TaskStatus!
+  priority: Priority!
+  assignee: User
+  dueDate: DateTime
+  estimatedHours: Float
+  actualHours: Float
+  tags: [String!]!
+  metadata: JSON
+  comments(first: Int = 20, after: String): CommentConnection!
+  isOverdue: Boolean!
+  completionPercentage: Int
+  createdBy: User!
+  lastModifiedBy: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  completedAt: DateTime
+}
+
+type Comment implements Node & Timestamped {
+  id: ID!
+  body: String!
+  author: User!
+  task: Task!
+  parentComment: Comment
+  replies(first: Int = 10): [Comment!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int!
+}
+
+type TaskConnection {
+  edges: [TaskEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TaskEdge {
+  node: Task!
+  cursor: String!
+}
+
+type CommentConnection {
+  edges: [CommentEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+type TaskStats {
+  total: Int!
+  pending: Int!
+  running: Int!
+  completed: Int!
+  failed: Int!
+  averageCompletionHours: Float
+  completionRate: Float!
+}
+
+type BatchPayload {
+  count: Int!
+  ids: [ID!]!
+}
+
+type AuthPayload {
+  token: String!
+  refreshToken: String!
+  user: User!
+  expiresAt: DateTime!
+}
+
+# ── Input Types ──────────────────────────────────────────────────────
+
+input CreateTaskInput {
+  title: String!
+  description: String
+  priority: Priority = MEDIUM
+  assigneeId: ID
+  dueDate: DateTime
+  estimatedHours: Float
+  tags: [String!]
+  metadata: JSON
+}
+
+input UpdateTaskInput {
+  title: String
+  description: String
+  status: TaskStatus
+  priority: Priority
+  assigneeId: ID
+  dueDate: DateTime
+  estimatedHours: Float
+  actualHours: Float
+  tags: [String!]
+  metadata: JSON
+}
+
+input TaskFilterInput {
+  status: [TaskStatus!]
+  priority: [Priority!]
+  assigneeId: ID
+  tags: [String!]
+  createdAfter: DateTime
+  createdBefore: DateTime
+  isOverdue: Boolean
+  search: String
+}
+
+input TaskSortInput {
+  field: TaskSortField!
+  order: SortOrder = DESC
+}
+
+enum TaskSortField {
+  CREATED_AT
+  UPDATED_AT
+  PRIORITY
+  DUE_DATE
+  TITLE
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+# ── Queries ──────────────────────────────────────────────────────────
+
+type Query {
+  # User queries
+  me: User
+  user(id: ID!): User
+  users(
+    role: UserRole
+    isActive: Boolean = true
+    first: Int = 20
+    after: String
+  ): [User!]!
+
+  # Task queries
+  task(id: ID!): Task
+  tasks(
+    filter: TaskFilterInput
+    sort: TaskSortInput
+    first: Int = 20
+    after: String
+  ): TaskConnection!
+
+  # Stats
+  taskStats(assigneeId: ID): TaskStats!
+
+  # Search
+  search(query: String!, first: Int = 10): [SearchResult!]!
+
+  # Node interface
+  node(id: ID!): Node
+}
+
+# ── Mutations ────────────────────────────────────────────────────────
+
+type Mutation {
+  # Auth
+  login(input: LoginInput!): AuthPayload!
+  refreshToken(token: String!): AuthPayload!
+  logout: Boolean!
+
+  # Tasks
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(id: ID!, input: UpdateTaskInput!): Task!
+  deleteTask(id: ID!): Boolean!
+  completeTask(id: ID!, actualHours: Float): Task!
+  assignTask(taskId: ID!, userId: ID!): Task!
+  batchUpdateStatus(ids: [ID!]!, status: TaskStatus!): BatchPayload!
+
+  # Comments
+  addComment(taskId: ID!, body: String!, parentId: ID): Comment!
+  updateComment(id: ID!, body: String!): Comment!
+  deleteComment(id: ID!): Boolean!
+}
+
+# ── Subscriptions ────────────────────────────────────────────────────
+
+type Subscription {
+  taskUpdated(id: ID): Task!
+  taskCreated: Task!
+  commentAdded(taskId: ID!): Comment!
+  userStatusChanged: User!
+}
+
+# ── Fragments ────────────────────────────────────────────────────────
+
+fragment UserBasic on User {
+  id
+  name
+  email
+  role
+  avatar
+}
+
+fragment TaskSummary on Task {
+  id
+  title
+  status
+  priority
+  isOverdue
+  dueDate
+  assignee {
+    ...UserBasic
+  }
+  tags
+  createdAt
+}
+
+fragment TaskDetail on Task {
+  ...TaskSummary
+  description
+  estimatedHours
+  actualHours
+  metadata
+  completionPercentage
+  comments(first: 5) {
+    edges {
+      node {
+        id
+        body
+        author {
+          ...UserBasic
+        }
+        createdAt
+      }
+    }
+    pageInfo {
+      hasNextPage
+      totalCount
+    }
+  }
+  createdBy {
+    ...UserBasic
+  }
+  updatedAt
+  completedAt
+}
+
+# ── Example Operations ───────────────────────────────────────────────
+
+query GetTasks($filter: TaskFilterInput, $sort: TaskSortInput, $first: Int = 20, $after: String) {
+  tasks(filter: $filter, sort: $sort, first: $first, after: $after) {
+    edges {
+      node {
+        ...TaskSummary
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+      totalCount
+    }
+  }
+}
+
+query GetTaskDetail($id: ID!) {
+  task(id: $id) {
+    ...TaskDetail
+  }
+}
+
+mutation CreateNewTask($input: CreateTaskInput!) {
+  createTask(input: $input) {
+    ...TaskDetail
+  }
+}
+
+mutation BatchComplete($ids: [ID!]!) {
+  batchUpdateStatus(ids: $ids, status: COMPLETED) {
+    count
+    ids
+  }
+}
+
+query SearchEverything($query: String!) {
+  search(query: $query, first: 20) {
+    ... on User {
+      __typename
+      ...UserBasic
+    }
+    ... on Task {
+      __typename
+      ...TaskSummary
+    }
+    ... on Comment {
+      __typename
+      id
+      body
+      author {
+        name
+      }
+    }
+  }
+}
+
+subscription WatchTask($id: ID!) {
+  taskUpdated(id: $id) {
+    ...TaskDetail
+  }
+}
+
+# ── Directives ───────────────────────────────────────────────────────
+
+type DeprecatedFields {
+  currentField: String!
+  oldField: String @deprecated(reason: "Use currentField instead")
+  legacyStatus: String @deprecated
+}
+
+query ConditionalQuery($includeComments: Boolean!, $skipMeta: Boolean!) {
+  task(id: "task-001") {
+    id
+    title
+    comments(first: 10) @include(if: $includeComments) {
+      edges {
+        node {
+          body
+        }
+      }
+    }
+    metadata @skip(if: $skipMeta)
+  }
+}

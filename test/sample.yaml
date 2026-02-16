@@ -1,0 +1,265 @@
+# Poikile Theme — YAML Test File
+#
+# Colors vary by variant — see PALETTE.md for hex values per theme.
+#
+# Scopes to verify:
+#   entity.name.tag.yaml                      → attribute  (keys)
+#   string.unquoted.plain.out.yaml            → string  (unquoted string values)
+#   string.quoted.single.yaml                 → string  (single-quoted strings)
+#   string.quoted.double.yaml                 → string  (double-quoted strings)
+#   string.unquoted.block.yaml                → string  (multiline block strings)
+#   constant.numeric.yaml                     → number  (numbers)
+#   constant.language.boolean.yaml            → number  (true, false, yes, no)
+#   constant.language.null.yaml               → number  (null, ~)
+#   keyword.control.flow.yaml                 → keyword  (---, ...)
+#   punctuation.definition.block.sequence.item.yaml → fg.subtle (-)
+#   punctuation.definition.mapping.yaml       → fg.subtle  (:)
+#   variable.other.alias.yaml                 → decorator  (&anchor, *alias)
+#   storage.type.tag-handle.yaml              → type  (!!str, !!int)
+#   comment                                   → fg.muted  italic
+
+---
+# Document start marker
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: poikile-api
+  namespace: production
+  labels:
+    app: poikile
+    version: "2.1.0"
+    tier: backend
+    environment: production
+  annotations:
+    deployment.kubernetes.io/revision: "7"
+    description: 'Main API deployment for the Poikile service'
+
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: poikile
+      tier: backend
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+  template:
+    metadata:
+      labels:
+        app: poikile
+        tier: backend
+    spec:
+      serviceAccountName: poikile-api
+      terminationGracePeriodSeconds: 30
+
+      # Init containers
+      initContainers:
+        - name: migrations
+          image: poikile/migrations:2.1.0
+          command: ["./migrate", "--direction", "up"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: connection-string
+
+      containers:
+        - name: api
+          image: poikile/api:2.1.0
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+            - containerPort: 9090
+              protocol: TCP
+              name: metrics
+
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "8080"
+            - name: LOG_LEVEL
+              value: info
+            - name: MAX_CONNECTIONS
+              value: "100"
+            - name: ENABLE_CACHE
+              value: "true"
+            - name: RATE_LIMIT
+              value: "10.5"
+            - name: DEBUG
+              value: "false"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: secret-key
+
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+
+      volumes:
+        - name: config
+          configMap:
+            name: poikile-config
+        - name: tmp
+          emptyDir: {}
+
+      # Node affinity
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - poikile
+                topologyKey: kubernetes.io/hostname
+
+---
+# Second document in multi-document YAML
+
+# Anchors and aliases
+defaults: &defaults
+  timeout: 30
+  retries: 3
+  verify_ssl: true
+  log_format: json
+
+services:
+  api:
+    <<: *defaults
+    port: 8080
+    workers: 4
+    features:
+      - authentication
+      - rate_limiting
+      - caching
+
+  worker:
+    <<: *defaults
+    timeout: 120
+    concurrency: 8
+    queues:
+      - default
+      - priority
+      - scheduled
+
+# Type tags
+typed_values:
+  explicit_string: !!str 42
+  explicit_int: !!int "100"
+  explicit_float: !!float "3.14"
+  explicit_bool: !!bool "yes"
+  explicit_null: !!null ""
+
+# Various value types
+booleans:
+  truthy: true
+  falsy: false
+  yes_val: yes
+  no_val: no
+
+numbers:
+  integer: 42
+  negative: -17
+  float: 3.14159
+  scientific: 6.022e23
+  hex: 0xFF
+  octal: 0o755
+  infinity: .inf
+  negative_infinity: -.inf
+  not_a_number: .nan
+
+nulls:
+  tilde: ~
+  word: null
+  empty:
+
+# Multiline strings
+multiline:
+  literal_block: |
+    This is a literal block scalar.
+    Line breaks are preserved exactly.
+    
+    Including blank lines.
+    Indentation is stripped.
+  folded_block: >
+    This is a folded block scalar.
+    Consecutive lines are joined
+    into a single paragraph.
+
+    But blank lines start new paragraphs.
+  literal_strip: |-
+    No trailing newline
+    after this block
+  folded_keep: >+
+    Trailing newlines
+    are preserved here
+
+# Complex nested structures
+database:
+  primary:
+    host: db-primary.internal
+    port: 5432
+    name: poikile_production
+    pool:
+      min: 5
+      max: 20
+      idle_timeout: 300
+    ssl:
+      enabled: true
+      ca_cert: /certs/ca.pem
+
+  replicas:
+    - host: db-replica-1.internal
+      port: 5432
+      weight: 50
+    - host: db-replica-2.internal
+      port: 5432
+      weight: 50
+
+...
+# Document end marker

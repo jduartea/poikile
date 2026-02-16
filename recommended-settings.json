@@ -1,0 +1,77 @@
+{
+  // ── Semantic Highlighting ─────────────────────────────────────────────
+  // Required for semantic token colors to take effect.
+  "editor.semanticHighlighting.enabled": true,
+
+  // ── Bracket Pair Colorization ─────────────────────────────────────────
+  // Uses the theme's 6-color bracket pair palette.
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
+
+  // ── Whitespace & Guides ───────────────────────────────────────────────
+  "editor.renderWhitespace": "boundary",
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": true,
+
+  // ── Cursor & Scrolling ────────────────────────────────────────────────
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+
+  // ── Typography ────────────────────────────────────────────────────────
+  // Pick a ligature-capable monospace font for the best experience.
+  // Recommended (in order of preference):
+  //   - JetBrains Mono  — excellent readability, free
+  //   - Fira Code       — wide ligature support, free
+  //   - Cascadia Code   — Microsoft's monospace, free
+  //   - Source Code Pro  — Adobe's monospace, free
+  //   - Monaspace Neon  — GitHub's variable monospace, free
+  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.6,
+  "editor.fontWeight": "400",
+
+  // ── Editor Behavior ───────────────────────────────────────────────────
+  "editor.minimap.enabled": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.scale": 1,
+  "editor.stickyScroll.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.inlayHints.enabled": "onUnlessPressed",
+
+  // ── Terminal ──────────────────────────────────────────────────────────
+  "terminal.integrated.fontFamily": "'JetBrains Mono', 'Fira Code', monospace",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.4,
+
+  // ── Icon Theme ────────────────────────────────────────────────────
+  // Catppuccin Icons pairs well with Poikile.
+  // Use Mocha for dark variants, Latte for light variants.
+  //
+  // For dark (Ataraxia / Apatheia):
+  "workbench.iconTheme": "catppuccin-mocha",
+  //
+  // For light (Euthymia / Katalepsis):
+  // "workbench.iconTheme": "catppuccin-latte",
+
+  // ── Workbench ─────────────────────────────────────────────────────────
+  // Optional color customizations for fine-tuning.
+  // Uncomment and adjust any of these if you want to tweak the theme:
+  //
+  // "workbench.colorCustomizations": {
+  //   "[Poikile - Ataraxia]": {
+  //     "editor.background": "#1a1a1e",
+  //     "editorCursor.foreground": "#b48ead",
+  //     "statusBar.background": "#141416"
+  //   }
+  // },
+  //
+  // "editor.tokenColorCustomizations": {
+  //   "[Poikile - Ataraxia]": {
+  //     "comments": "#8a8784",
+  //     "strings": "#a3b87c"
+  //   }
+  // }
+}

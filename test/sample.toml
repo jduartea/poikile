@@ -1,0 +1,211 @@
+# Poikile Theme — TOML Test File
+#
+# Colors vary by variant — see PALETTE.md for hex values per theme.
+#
+# Scopes to verify:
+#   support.type.property-name.toml  → attribute  (keys)
+#   entity.name.section.toml         → function  ([section headers])
+#   entity.name.array.toml           → function  ([[array tables]])
+#   string.quoted.single.basic.toml  → string  (single-quoted strings)
+#   string.quoted.double.basic.toml  → string  (double-quoted strings)
+#   constant.numeric.toml            → number  (numbers)
+#   constant.numeric.date.toml       → number  (dates)
+#   constant.language.boolean.toml   → number  (true, false)
+#   comment                          → fg.muted  italic
+
+# Top-level key/value pairs
+title = "Poikile Theme Suite Configuration"
+version = "0.1.0"
+edition = "2024"
+publish = true
+
+[package]
+name = "poikile-theme"
+description = "Four Stoic-inspired color themes for VS Code / Cursor"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/jduartea/poikile-theme"
+homepage = "https://poikile.dev"
+keywords = ["theme", "dark", "light", "stoic", "warm", "vivid"]
+categories = ["development-tools"]
+rust-version = "1.70"
+
+[package.metadata]
+msrv = "1.70.0"
+ci = true
+
+# Dependencies section
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.35", features = ["full"] }
+anyhow = "1.0"
+tracing = "0.1"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.4"
+tempfile = "3.9"
+
+[build-dependencies]
+cc = "1.0"
+
+# Profile configurations
+[profile.dev]
+opt-level = 0
+debug = true
+overflow-checks = true
+lto = false
+
+[profile.release]
+opt-level = 3
+debug = false
+strip = "symbols"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+
+[profile.bench]
+inherits = "release"
+debug = true
+
+# Feature flags
+[features]
+default = ["json", "logging"]
+json = ["serde_json"]
+logging = ["tracing"]
+experimental = []
+full = ["json", "logging", "experimental"]
+
+# Application configuration
+[server]
+host = "0.0.0.0"
+port = 8080
+workers = 4
+max_connections = 1000
+request_timeout = 30.5
+keep_alive = true
+enable_tls = false
+tls_cert = '/etc/certs/server.pem'
+tls_key = '/etc/certs/server.key'
+
+[server.cors]
+allowed_origins = ["https://poikile.dev", "https://app.poikile.dev"]
+allowed_methods = ["GET", "POST", "PUT", "DELETE"]
+max_age = 86400
+allow_credentials = true
+
+[database]
+url = "postgresql://localhost:5432/poikile"
+pool_min = 5
+pool_max = 20
+idle_timeout = 300
+ssl_mode = "prefer"
+statement_timeout = 10000
+
+[database.migrations]
+directory = "./migrations"
+auto_run = true
+
+[cache]
+backend = "redis"
+url = "redis://localhost:6379/0"
+ttl = 3600
+max_memory = "256mb"
+eviction_policy = "allkeys-lru"
+
+# Logging configuration
+[logging]
+level = "info"
+format = "json"
+output = "stdout"
+
+[logging.file]
+enabled = false
+path = "/var/log/poikile/app.log"
+max_size = "100mb"
+max_files = 10
+compress = true
+
+# Numeric edge cases
+[limits]
+max_payload_bytes = 10_485_760
+rate_limit_per_second = 100.0
+burst_size = 250
+negative_offset = -42
+hex_color = 0xFFAA00
+octal_perms = 0o755
+binary_flags = 0b10101010
+
+# Dates and times
+[timestamps]
+created = 2024-01-15
+updated = 2024-12-01T10:30:00Z
+expires = 2025-06-30T23:59:59-05:00
+local_date = 2024-03-15
+local_time = 14:30:00
+local_datetime = 2024-03-15T14:30:00
+
+# Array tables
+[[themes]]
+name = "Poikile - Ataraxia"
+type = "dark"
+variant = "warm"
+primary_accent = "#c2788e"
+is_default = true
+
+[[themes]]
+name = "Poikile - Apatheia"
+type = "dark"
+variant = "vivid"
+primary_accent = "#d4698e"
+is_default = false
+
+[[themes]]
+name = "Poikile - Euthymia"
+type = "light"
+variant = "warm"
+primary_accent = "#9e5a6e"
+is_default = false
+
+[[themes]]
+name = "Poikile - Katalepsis"
+type = "light"
+variant = "vivid"
+primary_accent = "#c0386e"
+is_default = false
+
+[[themes.colors]]
+token = "keyword"
+hex = "#c2788e"
+role = "Control flow and declarations"
+
+[[themes.colors]]
+token = "function"
+hex = "#d4a55c"
+role = "Function and method names"
+
+[[themes.colors]]
+token = "type"
+hex = "#7db89e"
+role = "Types, classes, interfaces"
+
+# Inline tables
+[inline_examples]
+point = { x = 10, y = 20 }
+color = { r = 180, g = 120, b = 174, a = 1.0 }
+range = { min = 0.0, max = 1.0, step = 0.1 }
+
+# Multiline basic strings
+[templates]
+query = """
+SELECT id, name, status
+FROM tasks
+WHERE priority = $1
+  AND created_at > $2
+ORDER BY created_at DESC
+"""
+
+raw_path = 'C:\Users\admin\path\to\file'
+escaped = "Line 1\nLine 2\tTabbed"

@@ -1,0 +1,393 @@
+// Poikile Theme — SCSS Test File
+//
+// Colors vary by variant — see PALETTE.md for hex values per theme.
+//
+// Scopes to verify (in addition to all CSS scopes):
+//   entity.name.function.scss  → function  (mixin names)
+//   variable.scss              → fg.default  ($variable names)
+//   keyword.control.scss       → keyword  (@include, @extend, @mixin, @if, @else, @for, @each)
+
+// ── Variables ─────────────────────────────────────────────────────────
+
+$bg-deep: #141416;
+$bg-editor: #1a1a1e;
+$bg-surface: #1e1e22;
+$bg-highlight: #24242a;
+$bg-overlay: #28282e;
+$bg-selection: #3a3a44;
+
+$fg-muted: #8a8784;
+$fg-subtle: #9b9baa;
+$fg-default: #d4d0c8;
+$fg-bright: #e8e4dc;
+
+$accent: #b48ead;
+$accent-hover: #c29dbb;
+$error: #d4626e;
+$success: #7db87a;
+$warning: #d9b44c;
+
+$font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 2rem,
+  xl: 4rem,
+);
+
+$z-layers: (
+  base: 0,
+  dropdown: 100,
+  sticky: 200,
+  modal: 300,
+  toast: 400,
+  tooltip: 500,
+);
+
+// ── Functions ─────────────────────────────────────────────────────────
+
+@function spacing($key) {
+  @if map-has-key($spacing, $key) {
+    @return map-get($spacing, $key);
+  }
+  @warn "Unknown spacing key: #{$key}";
+  @return 0;
+}
+
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @error "No z-index found for `#{$layer}`.";
+  }
+  @return map-get($z-layers, $layer);
+}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// ── Mixins ────────────────────────────────────────────────────────────
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin theme-transition($properties...) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: append($transitions, $property 150ms ease, comma);
+  }
+  transition: $transitions;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ── Placeholder Selectors ─────────────────────────────────────────────
+
+%card-base {
+  background-color: $bg-surface;
+  border: 1px solid $bg-selection;
+  border-radius: 8px;
+  padding: spacing(md);
+}
+
+%interactive {
+  cursor: pointer;
+  @include theme-transition(background-color, border-color, box-shadow);
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+// ── Component Styles ──────────────────────────────────────────────────
+
+.app {
+  font-family: $font-sans;
+  background-color: $bg-editor;
+  color: $fg-default;
+  min-height: 100vh;
+
+  &__header {
+    background-color: $bg-deep;
+    border-bottom: 1px solid rgba($bg-selection, 0.5);
+    padding: spacing(sm) spacing(lg);
+    @include flex-center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: z(sticky);
+  }
+
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: spacing(lg);
+
+    @include respond-to(lg) {
+      padding: spacing(xl);
+    }
+  }
+
+  &__footer {
+    background-color: $bg-deep;
+    padding: spacing(md) spacing(lg);
+    text-align: center;
+    color: $fg-muted;
+    font-size: 0.875rem;
+  }
+}
+
+// ── Button Component ──────────────────────────────────────────────────
+
+.btn {
+  @extend %interactive;
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(xs);
+  padding: spacing(sm) spacing(md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  text-decoration: none;
+
+  &--primary {
+    background-color: $accent;
+    color: $bg-deep;
+
+    &:hover {
+      background-color: $accent-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba($accent, 0.3);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    color: $fg-default;
+    border-color: $bg-selection;
+
+    &:hover {
+      background-color: $bg-highlight;
+      border-color: $fg-subtle;
+    }
+  }
+
+  &--danger {
+    background-color: $error;
+    color: white;
+
+    &:hover {
+      background-color: shade($error, 10%);
+    }
+  }
+
+  &--sm {
+    padding: spacing(xs) spacing(sm);
+    font-size: 0.75rem;
+  }
+
+  &--lg {
+    padding: spacing(md) spacing(lg);
+    font-size: 1rem;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .icon {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+// ── Card Component ────────────────────────────────────────────────────
+
+.card {
+  @extend %card-base;
+  @extend %interactive;
+
+  &:hover {
+    border-color: rgba($accent, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &__title {
+    color: $fg-bright;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: spacing(sm);
+    @include truncate;
+  }
+
+  &__body {
+    color: $fg-default;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    @include truncate(3);
+  }
+
+  &__footer {
+    margin-top: spacing(md);
+    padding-top: spacing(sm);
+    border-top: 1px solid rgba($bg-selection, 0.5);
+    @include flex-center;
+    justify-content: space-between;
+  }
+}
+
+// ── Control Flow ──────────────────────────────────────────────────────
+
+@for $i from 1 through 6 {
+  .h#{$i} {
+    font-size: #{2.5 - ($i * 0.25)}rem;
+    font-weight: if($i <= 2, 700, 600);
+    color: if($i == 1, $fg-bright, $fg-default);
+  }
+}
+
+@each $name, $value in $spacing {
+  .m-#{$name} { margin: $value; }
+  .p-#{$name} { padding: $value; }
+  .mt-#{$name} { margin-top: $value; }
+  .mb-#{$name} { margin-bottom: $value; }
+  .ml-#{$name} { margin-left: $value; }
+  .mr-#{$name} { margin-right: $value; }
+}
+
+@each $name, $bp in $breakpoints {
+  @media (min-width: $bp) {
+    .hidden-#{$name}-up {
+      display: none !important;
+    }
+  }
+}
+
+// ── Status colors with maps ──────────────────────────────────────────
+
+$status-colors: (
+  success: $success,
+  error: $error,
+  warning: $warning,
+  info: #7a9ec2,
+);
+
+@each $status, $color in $status-colors {
+  .badge--#{$status} {
+    background-color: rgba($color, 0.15);
+    color: $color;
+    border: 1px solid rgba($color, 0.3);
+    padding: spacing(xs) spacing(sm);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .alert--#{$status} {
+    @extend %card-base;
+    border-color: rgba($color, 0.3);
+    background-color: rgba($color, 0.05);
+
+    &::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 100%;
+      background-color: $color;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 4px 0 0 4px;
+    }
+  }
+}
+
+// ── Animations ────────────────────────────────────────────────────────
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba($accent, 0.2);
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+// ── Utility: sr-only ──────────────────────────────────────────────────
+
+.sr-only {
+  @include visually-hidden;
+}

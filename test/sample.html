@@ -1,0 +1,248 @@
+<!-- Poikile Theme — HTML Test File
+
+Colors vary by variant — see PALETTE.md for hex values per theme.
+
+Scopes to verify:
+  entity.name.tag.html               → tag  (tag names)
+  entity.name.tag.structure.html     → tag  (html, head, body, main, section, article, nav, header, footer, aside, div, span)
+  entity.name.tag.inline.html        → tag  (a, strong, em, code, br, img, input)
+  entity.name.tag.block.html         → tag  (p, h1-h6, ul, ol, li, table, tr, td, th, form)
+  entity.name.tag.metadata.html      → tag  (meta, link, title, script, style)
+  entity.name.tag.custom.html        → tag  (web components)
+  entity.other.attribute-name.html   → attribute  (attribute names)
+  support.class.html                 → attribute  (id, class attributes)
+  string.quoted.double.html          → string  (attribute values)
+  punctuation.definition.tag.begin   → fg.subtle  (<, >)
+  punctuation.definition.tag.end     → fg.subtle  (</>)
+  comment.block.html                 → fg.muted  italic
+  invalid.illegal.bad-attribute-name → error
+  meta.tag.html                      → fg.subtle
+-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Poikile — A Stoic-inspired color theme for focused work">
+  <meta name="author" content="jduartea">
+  <meta name="theme-color" content="#1a1a1e">
+
+  <title>Poikile Theme — Test Page</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    :root {
+      --bg-editor: #1a1a1e;
+      --fg-default: #d4d0c8;
+      --accent: #b48ead;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--bg-editor);
+      color: var(--fg-default);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  </style>
+
+  <script type="module" src="/js/app.js"></script>
+</head>
+
+<body class="theme-dark" id="app-root" data-version="2.1.0">
+
+  <!-- Navigation -->
+  <nav aria-label="Main navigation" role="navigation">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Home">
+        <img src="/images/logo.svg" alt="Poikile logo" width="32" height="32">
+        <span>Poikile</span>
+      </a>
+
+      <ul class="nav-links" role="menubar">
+        <li role="none"><a href="/features" role="menuitem">Features</a></li>
+        <li role="none"><a href="/docs" role="menuitem">Documentation</a></li>
+        <li role="none"><a href="/gallery" role="menuitem">Gallery</a></li>
+        <li role="none">
+          <a href="https://github.com/jduartea/poikile-theme"
+             role="menuitem"
+             target="_blank"
+             rel="noopener noreferrer">
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" role="banner">
+    <div class="container">
+      <h1>Poikile</h1>
+      <p class="subtitle">
+        A <strong>Stoic-inspired</strong> dark theme for
+        <em>calm, focused</em> development.
+      </p>
+      <div class="cta-group">
+        <a href="#install" class="btn btn-primary">Install Now</a>
+        <a href="#preview" class="btn btn-secondary">Preview</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="content" role="main">
+    <article class="feature-section">
+      <div class="container">
+        <h2>Design Philosophy</h2>
+
+        <section aria-labelledby="principles-heading">
+          <h3 id="principles-heading">Stoic Principles</h3>
+          <p>
+            Named after the <strong>Stoa Poikile</strong> (<em>"Painted Porch"</em>)
+            in ancient Athens, this theme embodies clarity, restraint, and focus.
+          </p>
+
+          <blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
+            <p>"The happiness of your life depends upon the quality of your thoughts."</p>
+            <footer>— <cite>Marcus Aurelius</cite></footer>
+          </blockquote>
+        </section>
+
+        <section aria-labelledby="palette-heading">
+          <h3 id="palette-heading">Color Palette</h3>
+
+          <table class="palette-table">
+            <caption>Syntax color assignments</caption>
+            <thead>
+              <tr>
+                <th scope="col">Token</th>
+                <th scope="col">Hex</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>keyword</code></td>
+                <td><span class="color-swatch" style="background:#c2788e"></span>#c2788e</td>
+                <td>Control flow, declarations</td>
+              </tr>
+              <tr>
+                <td><code>function</code></td>
+                <td><span class="color-swatch" style="background:#d4a55c"></span>#d4a55c</td>
+                <td>Function and method names</td>
+              </tr>
+              <tr>
+                <td><code>type</code></td>
+                <td><span class="color-swatch" style="background:#7db89e"></span>#7db89e</td>
+                <td>Types, classes, interfaces</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </article>
+
+    <!-- Form Section -->
+    <aside class="sidebar" aria-label="Newsletter">
+      <div class="container">
+        <h3>Stay Updated</h3>
+        <form action="/api/subscribe" method="post" novalidate>
+          <fieldset>
+            <legend>Newsletter Subscription</legend>
+
+            <div class="form-group">
+              <label for="email-input">Email address</label>
+              <input
+                type="email"
+                id="email-input"
+                name="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+                aria-describedby="email-hint"
+              >
+              <small id="email-hint">We'll never share your email.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="name-input">Name <span aria-hidden="true">(optional)</span></label>
+              <input type="text" id="name-input" name="name" autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="editor-select">Preferred editor</label>
+              <select id="editor-select" name="editor">
+                <option value="">Choose one...</option>
+                <option value="vscode" selected>VS Code</option>
+                <option value="cursor">Cursor</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <textarea name="feedback" rows="4" placeholder="Any feedback?"></textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="checkbox" id="terms" name="terms" required>
+              <label for="terms">I agree to the <a href="/terms">terms</a></label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </fieldset>
+        </form>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; 2024 Poikile Theme. Licensed under <abbr title="MIT License">MIT</abbr>.</p>
+      <p>
+        Built with <span aria-hidden="true">&hearts;</span>
+        <span class="sr-only">love</span> by
+        <a href="https://github.com/jduartea">jduartea</a>.
+      </p>
+      <hr>
+      <small>Version 2.1.0 &mdash; Last updated <time datetime="2024-12-01">December 1, 2024</time></small>
+    </div>
+  </footer>
+
+  <!-- Web Component (custom element) -->
+  <theme-preview
+    data-theme="poikile"
+    data-variant="dark"
+    data-animate="true"
+  ></theme-preview>
+
+  <!-- Inline script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const root = document.getElementById('app-root');
+      console.log('Theme loaded:', root.dataset.version);
+    });
+  </script>
+
+  <!-- No-script fallback -->
+  <noscript>
+    <div class="noscript-warning">
+      <p>This page works best with JavaScript enabled.</p>
+    </div>
+  </noscript>
+
+</body>
+</html>

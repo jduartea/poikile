@@ -1,0 +1,463 @@
+/* Poikile Theme — CSS Test File
+ *
+ * Colors vary by variant — see PALETTE.md for hex values per theme.
+ *
+ * Scopes to verify:
+ *   entity.name.tag.css                           → tag  (element selectors)
+ *   entity.other.attribute-name.class.css          → function  (.class selectors)
+ *   entity.other.attribute-name.id.css             → constant  (#id selectors)
+ *   entity.other.attribute-name.pseudo-class.css   → keyword  (:hover, :focus, :first-child)
+ *   entity.other.attribute-name.pseudo-element.css → keyword  (::before, ::after)
+ *   support.type.property-name.css                 → attribute  (property names)
+ *   support.constant.property-value.css            → fg.default  (property values)
+ *   support.constant.color.css                     → fg.default  (named colors)
+ *   constant.numeric.css                           → number  (numbers)
+ *   keyword.other.unit.css                         → number  (px, em, rem, %, vh, vw)
+ *   support.function.css                           → function  (calc, var, rgb, rgba, hsl, url)
+ *   variable.css                                   → fg.default  (--custom-properties)
+ *   keyword.control.at-rule.css                    → keyword  (@media, @import, @keyframes)
+ *   constant.other.color.rgb-value.css             → number  (#hex colors)
+ *   string.quoted.single.css                       → string  (strings)
+ *   string.quoted.double.css                       → string  (strings)
+ *   keyword.operator.css                           → fg.subtle  (>, ~, +, *)
+ *   meta.property-value.css                        → attribute
+ *   comment                                        → fg.muted  italic
+ */
+
+/* ── CSS Custom Properties (Variables) ─────────────────────────────── */
+
+:root {
+  /* Surface colors */
+  --bg-deep: #141416;
+  --bg-editor: #1a1a1e;
+  --bg-surface: #1e1e22;
+  --bg-highlight: #24242a;
+  --bg-overlay: #28282e;
+  --bg-selection: #3a3a44;
+
+  /* Foreground colors */
+  --fg-muted: #8a8784;
+  --fg-subtle: #9b9baa;
+  --fg-default: #d4d0c8;
+  --fg-bright: #e8e4dc;
+
+  /* Accent */
+  --accent: #b48ead;
+  --accent-hover: #c29dbb;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-size-base: 16px;
+  --line-height: 1.6;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-editor);
+  color: var(--fg-default);
+  line-height: var(--line-height);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Element Selectors ─────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--fg-bright);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+  margin-bottom: var(--space-md);
+  max-width: 65ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:visited {
+  color: #9b7fb5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+code {
+  background-color: var(--bg-surface);
+  padding: 0.125em 0.375em;
+  border-radius: 3px;
+  color: #d08a6e;
+}
+
+pre {
+  background-color: var(--bg-surface);
+  padding: var(--space-md);
+  border-radius: 6px;
+  overflow-x: auto;
+  border: 1px solid var(--bg-selection);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ── Class Selectors ───────────────────────────────────────────────── */
+
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--bg-deep);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(180, 142, 173, 0.3);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--fg-default);
+  border-color: var(--bg-selection);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-highlight);
+  border-color: var(--fg-subtle);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── ID Selector ───────────────────────────────────────────────────── */
+
+#app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main-content {
+  flex: 1;
+}
+
+/* ── Pseudo-classes & Pseudo-elements ──────────────────────────────── */
+
+.nav-link:first-child {
+  margin-left: 0;
+}
+
+.nav-link:last-child {
+  margin-right: 0;
+}
+
+.list-item:nth-child(odd) {
+  background-color: var(--bg-surface);
+}
+
+.list-item:nth-child(even) {
+  background-color: var(--bg-editor);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(180, 142, 173, 0.2);
+}
+
+input:not(:placeholder-shown):invalid {
+  border-color: #d4626e;
+}
+
+input::placeholder {
+  color: var(--fg-muted);
+  opacity: 1;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: var(--bg-overlay);
+  color: var(--fg-bright);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+
+/* ── Attribute Selectors ───────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--bg-selection);
+  border-radius: 6px;
+  color: var(--fg-default);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+/* ── Combinators ───────────────────────────────────────────────────── */
+
+.card > .card-header {
+  border-bottom: 1px solid var(--bg-selection);
+}
+
+.card + .card {
+  margin-top: var(--space-md);
+}
+
+.sidebar ~ .content {
+  margin-left: 280px;
+}
+
+/* ── Functions ─────────────────────────────────────────────────────── */
+
+.gradient-bg {
+  background: linear-gradient(
+    135deg,
+    var(--bg-deep) 0%,
+    var(--bg-editor) 50%,
+    var(--bg-surface) 100%
+  );
+}
+
+.clamped-text {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  width: min(100%, 800px);
+  padding: max(1rem, 2vw);
+}
+
+.calculated-layout {
+  width: calc(100% - var(--space-lg) * 2);
+  height: calc(100vh - 64px);
+  margin-top: calc(var(--space-xl) + 10px);
+}
+
+.color-demo {
+  background-color: rgb(26, 26, 30);
+  border-color: rgba(180, 142, 173, 0.5);
+  color: hsl(40, 12%, 81%);
+  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.25);
+}
+
+.bg-image {
+  background-image: url('/images/pattern.svg');
+  background-size: cover;
+}
+
+/* ── @media Queries ────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--space-md);
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-editor: #1a1a1e;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ── @keyframes ────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animated {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ── @import & @font-face ──────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Grid & Flexbox ────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Numeric values ────────────────────────────────────────────────── */
+
+.spacing-demo {
+  margin: 16px 24px 32px 24px;
+  padding: 1.5rem 2rem;
+  border-width: 1px;
+  border-radius: 0.5em;
+  opacity: 0.85;
+  z-index: 100;
+  line-height: 1.6;
+  font-weight: 700;
+  flex: 1 0 auto;
+  order: -1;
+}

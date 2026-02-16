@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "_comment": "Poikile Theme — JSON Test File. Colors vary by variant — see PALETTE.md for hex values per theme. Scopes: support.type.property-name.json → attribute (keys), string.quoted.double.json → string (string values), constant.numeric.json → number (numbers), constant.language.json → number (true/false/null), punctuation → fg.subtle",
+
+  "name": "poikile-theme",
+  "displayName": "Poikile",
+  "version": "0.1.0",
+  "description": "Four Stoic-inspired color themes — dark & light, warm & vivid.",
+  "publisher": "jduartea",
+  "license": "MIT",
+  "private": false,
+
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+
+  "categories": ["Themes"],
+  "keywords": [
+    "dark",
+    "light",
+    "stoic",
+    "warm",
+    "vivid",
+    "minimal",
+    "calm",
+    "theme"
+  ],
+
+  "contributes": {
+    "themes": [
+      { "label": "Poikile - Ataraxia",   "uiTheme": "vs-dark", "path": "./themes/poikile-ataraxia.json" },
+      { "label": "Poikile - Apatheia",    "uiTheme": "vs-dark", "path": "./themes/poikile-apatheia.json" },
+      { "label": "Poikile - Euthymia",    "uiTheme": "vs",      "path": "./themes/poikile-euthymia.json" },
+      { "label": "Poikile - Katalepsis",  "uiTheme": "vs",      "path": "./themes/poikile-katalepsis.json" }
+    ]
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jduartea/poikile-theme"
+  },
+
+  "palette": {
+    "surfaces": {
+      "bg.deep": "#141416",
+      "bg.editor": "#1a1a1e",
+      "bg.surface": "#1e1e22",
+      "bg.highlight": "#24242a",
+      "bg.overlay": "#28282e",
+      "bg.selection": "#3a3a44"
+    },
+    "foregrounds": {
+      "fg.muted": "#8a8784",
+      "fg.subtle": "#9b9baa",
+      "fg.default": "#d4d0c8",
+      "fg.bright": "#e8e4dc"
+    },
+    "syntax": {
+      "keyword": "#c2788e",
+      "function": "#d4a55c",
+      "type": "#7db89e",
+      "string": "#a3b87c",
+      "number": "#c9905a",
+      "constant": "#c8ba5e",
+      "decorator": "#b09cc5",
+      "namespace": "#8a9db5",
+      "tag": "#cf7d6b",
+      "regex": "#d08a6e",
+      "attribute": "#b8a88e",
+      "link": "#8aadcf"
+    }
+  },
+
+  "settings": {
+    "maxRetries": 3,
+    "timeout": 30000,
+    "batchSize": 100,
+    "concurrency": 4,
+    "rateLimitPerSecond": 10.5,
+    "debugMode": false,
+    "verboseLogging": true,
+    "nullableField": null,
+    "emptyArray": [],
+    "emptyObject": {},
+    "pi": 3.14159,
+    "negativeOffset": -42,
+    "scientificNotation": 1.5e10
+  },
+
+  "nested": {
+    "level1": {
+      "level2": {
+        "level3": {
+          "level4": {
+            "deepValue": "This tests deeply nested JSON structure",
+            "deepNumber": 12345,
+            "deepBool": true,
+            "deepNull": null
+          }
+        }
+      }
+    }
+  },
+
+  "mixedArray": [
+    "string value",
+    42,
+    true,
+    false,
+    null,
+    {
+      "key": "nested object in array",
+      "count": 7
+    },
+    [1, 2, 3],
+    "last item"
+  ]
+}
