@@ -65,9 +65,9 @@
     "editorGutter.modifiedBackground": "#fbbf24",
     "editorGutter.addedBackground": "#4ade80",
     "editorGutter.deletedBackground": "#f87171",
-    "editorGutter.commentRangeForeground": "#9ca3af",
+    "editorGutter.commentRangeForeground": "#6b7280",
     "editorGutter.foldingControlForeground": "#94a3b8",
-    "editorLineNumber.foreground": "#9ca3af",
+    "editorLineNumber.foreground": "#6b7280",
     "editorLineNumber.activeForeground": "#d1d5db",
 
     // ── Editor Groups & Tabs ────────────────────────────────────────────
@@ -410,7 +410,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#9ca3af",
+        "foreground": "#6b7280",
         "fontStyle": "italic"
       }
     },
@@ -997,7 +997,26 @@
     // 2. GO
     // ═══════════════════════════════════════════════════════════════════
     {
-      "name": "Go keywords (control flow)",
+      "name": "Go control/concurrency keywords (select, case, go, for, range)",
+      "scope": [
+        "keyword.control.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      }
+    },
+    {
+      "name": "Go iota constant",
+      "scope": [
+        "constant.language.iota.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go keywords (func, defer, return, var, const, package, import)",
       "scope": [
         "keyword.go",
         "keyword.function.go",
@@ -1013,7 +1032,7 @@
         "keyword.channel.go"
       ],
       "settings": {
-        "foreground": "#a78bfa"
+        "foreground": "#818cf8"
       }
     },
     {
@@ -1035,17 +1054,37 @@
         "keyword.map.go"
       ],
       "settings": {
-        "foreground": "#fb7185"
+        "foreground": "#f472b6"
       }
     },
     {
-      "name": "Go functions",
+      "name": "Go built-in functions (make, len, append, etc.)",
       "scope": [
-        "entity.name.function.go",
+        "entity.name.function.support.builtin.go",
         "support.function.builtin.go"
       ],
       "settings": {
-        "foreground": "#facc15",
+        "foreground": "#5eead4",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go support/package functions (stdlib, etc.)",
+      "scope": [
+        "entity.name.function.support.go"
+      ],
+      "settings": {
+        "foreground": "#bef264",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go user-defined functions",
+      "scope": [
+        "entity.name.function.go"
+      ],
+      "settings": {
+        "foreground": "#fdba74",
         "fontStyle": "italic"
       }
     },
@@ -1071,7 +1110,7 @@
         "entity.name.type.go"
       ],
       "settings": {
-        "foreground": "#34d399",
+        "foreground": "#6ee7b7",
         "fontStyle": "italic"
       }
     },
@@ -1095,10 +1134,10 @@
     {
       "name": "Go variables",
       "scope": [
-        "variable.other.go"
+        "variable.other.assignment.go"
       ],
       "settings": {
-        "foreground": "#38bdf8"
+        "foreground": "#a78bfa"
       }
     },
     {
@@ -1109,6 +1148,36 @@
       ],
       "settings": {
         "foreground": "#60a5fa"
+      }
+    },
+    {
+      "name": "Go import path (variable.other.import)",
+      "scope": [
+        "variable.other.import.go"
+      ],
+      "settings": {
+        "foreground": "#60a5fa",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go import path (entity.name.import)",
+      "scope": [
+        "entity.name.import.go"
+      ],
+      "settings": {
+        "foreground": "#a78bfa"
+      }
+    },
+    {
+      "name": "Go double-quoted strings",
+      "scope": [
+        "string.quoted.double.go",
+        "punctuation.definition.string.begin.go",
+        "punctuation.definition.string.end.go"
+      ],
+      "settings": {
+        "foreground": "#94a3b8"
       }
     },
     {
@@ -2645,7 +2714,7 @@
     "operator": "#94a3b8",
 
     // ── Literals ────────────────────────────────────────────────────────
-    "comment": { "foreground": "#9ca3af", "fontStyle": "italic" },
+    "comment": { "foreground": "#6b7280", "fontStyle": "italic" },
     "string": "#a3e635",
     "number": "#fbbf24",
     "boolean": "#fbbf24",
