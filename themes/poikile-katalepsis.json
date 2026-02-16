@@ -350,7 +350,7 @@
     "debugConsoleInputIcon.foreground": "#c026d3",
     "debugTokenExpression.name": "#2563eb",
     "debugTokenExpression.value": "#475569",
-    "debugTokenExpression.string": "#65a30d",
+    "debugTokenExpression.string": "#64748b",
     "debugTokenExpression.boolean": "#d97706",
     "debugTokenExpression.number": "#d97706",
     "debugTokenExpression.error": "#dc2626",
@@ -417,7 +417,7 @@
 
     // ── Strings ─────────────────────────────────────────────────────────
     {
-      "name": "Strings",
+      "name": "Strings (content and quote punctuation)",
       "scope": [
         "string",
         "string.quoted.single",
@@ -425,10 +425,12 @@
         "string.quoted.triple",
         "string.template",
         "string.interpolated",
-        "punctuation.definition.string"
+        "punctuation.definition.string",
+        "punctuation.definition.string.begin",
+        "punctuation.definition.string.end"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -1279,7 +1281,7 @@
         "string.interpolated.dart"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -1621,7 +1623,7 @@
         "string.interpolated.python"
       ],
       "settings": {
-        "foreground": "#ea580c"
+        "foreground": "#64748b"
       }
     },
     {
@@ -1829,7 +1831,7 @@
         "string.interpolated.ruby"
       ],
       "settings": {
-        "foreground": "#ea580c"
+        "foreground": "#64748b"
       }
     },
     {
@@ -1884,7 +1886,7 @@
         "string.quoted.double.html"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2030,7 +2032,7 @@
         "string.quoted.double.css"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2069,15 +2071,71 @@
     //  markdown-only scopes.)
 
     // ═══════════════════════════════════════════════════════════════════
-    // 11. JSON
+    // 11. JSON — rethought palette (keys by depth, values by type, punctuation muted)
     // ═══════════════════════════════════════════════════════════════════
+    // Keys: cool→warm spectrum (blue→sky→teal→emerald→fuchsia→rose), then slate for deep
+    // Values: strings/number/literals/punctuation each distinct
     {
-      "name": "JSON keys (visually distinct from values)",
+      "name": "JSON keys — level 6+ (deepest)",
       "scope": [
-        "support.type.property-name.json"
+        "meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
       ],
       "settings": {
-        "foreground": "#d97706"
+        "foreground": "#64748b"
+      }
+    },
+    {
+      "name": "JSON keys — level 5",
+      "scope": [
+        "meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#e11d48"
+      }
+    },
+    {
+      "name": "JSON keys — level 4",
+      "scope": [
+        "meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#c026d3"
+      }
+    },
+    {
+      "name": "JSON keys — level 3",
+      "scope": [
+        "meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#059669"
+      }
+    },
+    {
+      "name": "JSON keys — level 2",
+      "scope": [
+        "meta.structure.dictionary.json meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#0d9488"
+      }
+    },
+    {
+      "name": "JSON keys — level 1",
+      "scope": [
+        "meta.structure.dictionary.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#0ea5e9"
+      }
+    },
+    {
+      "name": "JSON keys — level 0 (root)",
+      "scope": [
+        "meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#2563eb"
       }
     },
     {
@@ -2086,7 +2144,7 @@
         "string.quoted.double.json"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2095,7 +2153,7 @@
         "constant.numeric.json"
       ],
       "settings": {
-        "foreground": "#d97706"
+        "foreground": "#7c3aed"
       }
     },
     {
@@ -2120,7 +2178,7 @@
         "punctuation.definition.array.end.json"
       ],
       "settings": {
-        "foreground": "#64748b"
+        "foreground": "#94a3b8"
       }
     },
 
@@ -2145,7 +2203,7 @@
         "string.unquoted.block.yaml"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2242,7 +2300,7 @@
         "string.quoted.double.basic.toml"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2305,7 +2363,7 @@
         "string.interpolated.dollar.shell"
       ],
       "settings": {
-        "foreground": "#ea580c"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2388,7 +2446,7 @@
         "string.quoted.single.sql"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
     {
@@ -2545,7 +2603,7 @@
         "string.quoted.double.proto"
       ],
       "settings": {
-        "foreground": "#65a30d"
+        "foreground": "#64748b"
       }
     },
 
@@ -2611,7 +2669,7 @@
         "entity.name.tag.svelte"
       ],
       "settings": {
-        "foreground": "#ea580c"
+        "foreground": "#0891b2"
       }
     },
     {
@@ -2626,21 +2684,21 @@
       }
     },
     {
-      "name": "Vue variables",
+      "name": "Vue variables (ref, reactive, computed)",
       "scope": [
         "variable.other.vue"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#7c3aed"
       }
     },
     {
-      "name": "Vue composition API functions",
+      "name": "Vue composition API (defineComponent, onMounted, watch)",
       "scope": [
         "support.function.vue"
       ],
       "settings": {
-        "foreground": "#ca8a04"
+        "foreground": "#0d9488"
       }
     },
 
@@ -2732,7 +2790,7 @@
 
     // ── Literals ────────────────────────────────────────────────────────
     "comment": { "foreground": "#9ca3af", "fontStyle": "italic" },
-    "string": "#65a30d",
+    "string": "#64748b",
     "number": "#d97706",
     "boolean": "#d97706",
     "regexp": "#ea580c",
