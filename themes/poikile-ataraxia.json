@@ -44,18 +44,18 @@
     "editorCodeLens.foreground": "#8a8784",
     "editorBracketMatch.background": "#3a3a4466",
     "editorBracketMatch.border": "#9b9baa66",
-    "editorBracketHighlight.foreground1": "#c9905a",
-    "editorBracketHighlight.foreground2": "#7db89e",
-    "editorBracketHighlight.foreground3": "#b09cc5",
+    "editorBracketHighlight.foreground1": "#d4a55c",
+    "editorBracketHighlight.foreground2": "#d4a55c",
+    "editorBracketHighlight.foreground3": "#d4a55c",
     "editorBracketHighlight.foreground4": "#d4a55c",
-    "editorBracketHighlight.foreground5": "#8a9db5",
-    "editorBracketHighlight.foreground6": "#c2788e",
-    "editorBracketPairGuide.activeBackground1": "#c9905a66",
-    "editorBracketPairGuide.activeBackground2": "#7db89e66",
-    "editorBracketPairGuide.activeBackground3": "#b09cc566",
-    "editorBracketPairGuide.activeBackground4": "#d4a55c66",
-    "editorBracketPairGuide.activeBackground5": "#8a9db566",
-    "editorBracketPairGuide.activeBackground6": "#c2788e66",
+    "editorBracketHighlight.foreground5": "#d4a55c",
+    "editorBracketHighlight.foreground6": "#d4a55c",
+    "editorBracketPairGuide.activeBackground1": "#d4a55c40",
+    "editorBracketPairGuide.activeBackground2": "#d4a55c40",
+    "editorBracketPairGuide.activeBackground3": "#d4a55c40",
+    "editorBracketPairGuide.activeBackground4": "#d4a55c40",
+    "editorBracketPairGuide.activeBackground5": "#d4a55c40",
+    "editorBracketPairGuide.activeBackground6": "#d4a55c40",
     "editorGhostText.foreground": "#8a878466",
     "editorStickyScroll.background": "#1e1e22",
     "editorStickyScrollHover.background": "#24242a",
@@ -953,14 +953,15 @@
       }
     },
     {
-      "name": "Go type-constructor keywords (struct, interface, map)",
+      "name": "Go type-related keywords (type, struct, interface, map)",
       "scope": [
+        "keyword.type.go",
         "keyword.struct.go",
         "keyword.interface.go",
         "keyword.map.go"
       ],
       "settings": {
-        "foreground": "#7db89e"
+        "foreground": "#c2788e"
       }
     },
     {
@@ -977,10 +978,16 @@
     {
       "name": "Go built-in types (error, int, string, bool, etc.)",
       "scope": [
-        "storage.type.go"
+        "storage.type.boolean.go",
+        "storage.type.byte.go",
+        "storage.type.error.go",
+        "storage.type.numeric.go",
+        "storage.type.rune.go",
+        "storage.type.string.go",
+        "storage.type.uintptr.go"
       ],
       "settings": {
-        "foreground": "#c9905a",
+        "foreground": "#7db89e",
         "fontStyle": "italic"
       }
     },
@@ -992,6 +999,23 @@
       "settings": {
         "foreground": "#7db89e",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go brackets and punctuation in type expressions",
+      "scope": [
+        "punctuation.definition.begin.bracket.square.go",
+        "punctuation.definition.end.bracket.square.go",
+        "punctuation.definition.begin.bracket.curly.go",
+        "punctuation.definition.end.bracket.curly.go",
+        "punctuation.definition.begin.bracket.round.go",
+        "punctuation.definition.end.bracket.round.go",
+        "punctuation.other.comma.go",
+        "punctuation.other.period.go",
+        "punctuation.other.colon.go"
+      ],
+      "settings": {
+        "foreground": "#9b9baa"
       }
     },
     {
